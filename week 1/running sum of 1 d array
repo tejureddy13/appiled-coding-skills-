@@ -1,0 +1,29 @@
+class Solution {
+    public int[] getSumAbsoluteDifferences(int[] nums) {
+        int totalSum = 0;
+        for (int num : nums) {
+            totalSum += num;
+        }
+
+        int pointer = 0;
+        int leftSum = 0;
+        int[] results = new int[nums.length];
+        for (int num : nums) {
+            //total - left sum - num
+            int rightSum = totalSum - leftSum - num;
+
+            //num * index - left sum
+            int left = num * pointer - leftSum;
+
+            //right sum - num * (length - index - 1)
+            int right = rightSum - num * (nums.length - pointer - 1);
+
+            leftSum += num;
+            results[pointer] = left + right;
+
+            pointer++;
+        }
+
+        return results;
+    }
+}
